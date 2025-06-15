@@ -16,8 +16,8 @@ public class ComplaintResource {
 
     @GET
     @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
-    public List<ComplaintDTO> getAllComplaints() {
-        return service.findAll();
+    public List<ComplaintDTO> getAllComplaints(@QueryParam("status") String status) {
+        return service.findAll(status);
     }
     @GET
     @Path("{id}")
@@ -46,4 +46,9 @@ public class ComplaintResource {
         service.remove(id);
     }
 
+    @GET
+    @Path("{id}/status")
+    public String checkStatus(@PathParam("id") Long id) {
+        return service.find(id).getStatus();
+    }
 }

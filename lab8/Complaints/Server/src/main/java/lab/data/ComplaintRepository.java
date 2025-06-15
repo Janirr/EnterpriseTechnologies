@@ -16,18 +16,28 @@ public class ComplaintRepository {
     public void create(Complaint entity) {
         em.persist(entity);
     }
+
     public void edit(Complaint entity) {
         em.merge(entity);
     }
+
     public void remove(Complaint entity) {
         em.remove(em.merge(entity));
     }
+
     public Complaint find(Object id) {
         return em.find(Complaint.class, id);
     }
-    public List<Complaint> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Complaint.class));
-        return em.createQuery(cq).getResultList();
+
+    public List<Complaint> findAll(String status) {
+        if (status != null && !status.isEmpty()) {
+            return em.createNamedQuery("Complaint.findByStatus")
+                    .setParameter("status", status)
+                    .getResultList();
+        } else {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Complaint.class));
+            return em.createQuery(cq).getResultList();
+        }
     }
 }
