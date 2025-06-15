@@ -31,6 +31,32 @@
                 xhr.open("GET", "/math?x=" + encodeURIComponent(x) + "&y=" + encodeURIComponent(y));
                 xhr.send();
             });
+            document.getElementById('calc_fetch').addEventListener('click', () => {
+                const x = document.getElementById('x').value;
+                const y = document.getElementById('y').value;
+
+                fetch("/math?x=" + x.toString() + "&y=" + y.toString(), {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(resp => {
+                        document.getElementById("sum").textContent = resp.sum;
+                        document.getElementById("difference").textContent = resp.difference;
+                        document.getElementById("product").textContent = resp.product;
+                        document.getElementById("quotient").textContent = resp.quotient;
+                    })
+                    .catch(error => {
+                        console.error("There was a problem with the fetch request:", error);
+                    });
+            });
         });
     </script>
 
