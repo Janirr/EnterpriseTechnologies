@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import ProductItem from './ProductItem';
 
-export default function ProductList() {
-  const [products, setProducts] = useState([]);
+export default function ProductList({ products }) {
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    axios.get('https://dummyjson.com/products')
-      .then(response => {
-        setProducts(response.data.products);
-      })
-      .catch(error => {
-        console.error('Błąd podczas pobierania produktów:', error);
-      });
-  }, []);
-
-  // Pomocnicza funkcja do obsługi zmiany pola tekstowego
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
-  // Filtrowanie produktów po tytule (case insensitive)
   const filteredProducts = products.filter(product =>
     product.title.toLowerCase().includes(filter.toLowerCase())
   );
@@ -41,14 +27,15 @@ export default function ProductList() {
       </label>
 
       <ul>
-        {filteredProducts.map(product => (
-          <ProductItem
-            key={product.id}
-            title={product.title}
-            brand={product.brand}
-          />
-        ))}
-      </ul>
+  {filteredProducts.map(product => (
+    <ProductItem
+      key={product.id}
+      id={product.id}          
+      title={product.title}
+      brand={product.brand}
+    />
+  ))}
+</ul>
     </div>
   );
 }
