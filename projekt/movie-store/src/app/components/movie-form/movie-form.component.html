@@ -1,0 +1,33 @@
+<form (ngSubmit)="addMovie()" class="container mt-4">
+  <div class="mb-3">
+    <label for="title" class="form-label">Tytuł</label>
+    <input [(ngModel)]="movie.title" name="title" id="title" class="form-control" placeholder="Tytuł" required>
+  </div>
+  
+  <div class="mb-3">
+    <label for="description" class="form-label">Opis</label>
+    <textarea [(ngModel)]="movie.description" name="description" id="description" class="form-control" placeholder="Opis"></textarea>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="year" class="form-label">Rok</label>
+      <input [(ngModel)]="movie.releaseYear" name="year" id="year" type="number" class="form-control" placeholder="Rok" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="price" class="form-label">Cena</label>
+      <input [(ngModel)]="movie.price" name="price" id="price" type="number" class="form-control" placeholder="Cena" required>
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="category" class="form-label">Kategoria</label>
+    <select [(ngModel)]="movie.category" name="category" id="category" class="form-select" required>
+      <option *ngFor="let category of categories" [ngValue]="category">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Dodaj film</button>
+</form>

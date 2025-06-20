@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2>Twój koszyk</h2>
+
+  <div *ngIf="cartItems.length === 0" class="alert alert-info">Koszyk jest pusty.</div>
+
+  <table class="table" *ngIf="cartItems.length > 0">
+    <thead>
+      <tr>
+        <th>Tytuł</th>
+        <th>Kategoria</th>
+        <th>Cena</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of cartItems">
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.category?.name }}</td>
+        <td>{{ movie.price | currency:'PLN' }}</td>
+        <td><button 
+            class="btn btn-danger btn-sm" 
+            *ngIf="movie.id !== undefined" 
+            (click)="removeFromCart(movie.id)">
+            Usuń
+          </button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="cartItems.length > 0" class="text-end fw-bold fs-5">
+    Razem: {{ total | currency:'PLN' }}
+  </div>
+</div>

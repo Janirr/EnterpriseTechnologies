@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h2>Katalog filmów</h2>
+  <select class="form-select mb-3" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+    <option value="">Wszystkie kategorie</option>
+    <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+  </select>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let movie of movies">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.title }} ({{ movie.releaseYear }})</h5>
+          <p>Kategoria: {{ movie.category?.name }}</p>
+          <p>Cena: {{ movie.price | currency:'PLN' }}</p>
+          <a [routerLink]="['/movies', movie.id]" class="btn btn-primary">Szczegóły</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

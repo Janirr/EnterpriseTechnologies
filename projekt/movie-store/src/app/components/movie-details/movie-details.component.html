@@ -1,0 +1,9 @@
+<div class="container mt-4" *ngIf="movie">
+  <h2>{{ movie.title }} ({{ movie.releaseYear }})</h2>
+  <p><strong>Kategoria:</strong> {{ movie.category?.name }}</p>
+  <p><strong>Opis:</strong></p>
+  <p>{{ movie.description }}</p>
+  <p><strong>Cena:</strong> {{ movie.price | currency:'PLN' }}</p>
+  <button class="btn btn-success" (click)="addToCart()">Dodaj do koszyka</button>
+  <a routerLink="/movies" class="btn btn-secondary ms-2">Powrót</a>
+</div>

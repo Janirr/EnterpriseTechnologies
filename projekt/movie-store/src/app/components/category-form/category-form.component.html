@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nowa kategoria</label>
+      <input
+        id="name"
+        formControlName="name"
+        class="form-control"
+        placeholder="Wpisz nazwę nowej kategorii"
+        required
+      />
+      <div *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched" class="text-danger">
+        Nazwa kategorii jest wymagana (min. 3 znaki).
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Dodaj kategorię</button>
+  </form>
+
+  <div *ngIf="submissionStatus() !== null" class="alert alert-info mt-3">
+    {{ submissionStatus() }}
+  </div>
+</div>
