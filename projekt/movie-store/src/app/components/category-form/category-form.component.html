@@ -9,14 +9,18 @@
         placeholder="Wpisz nazwę nowej kategorii"
         required
       />
-      <div *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched" class="text-danger">
-        Nazwa kategorii jest wymagana (min. 3 znaki).
-      </div>
+      @if (categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched) {
+        <div class="text-danger">
+          Nazwa kategorii jest wymagana (min. 3 znaki).
+        </div>
+      }
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Dodaj kategorię</button>
   </form>
 
-  <div *ngIf="submissionStatus() !== null" class="alert alert-info mt-3">
-    {{ submissionStatus() }}
-  </div>
+  @if (submissionStatus() !== null) {
+    <div class="alert alert-info mt-3">
+      {{ submissionStatus() }}
+    </div>
+  }
 </div>
