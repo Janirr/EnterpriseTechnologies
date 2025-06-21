@@ -23,10 +23,10 @@ export class CategoryFormComponent {
       const categoryName = this.categoryForm.value.name;
       this.categoryService.addCategory({ id: undefined, name: categoryName }).subscribe({
         next: () => {
-          this.submissionStatus.set('Category added successfully!');
+          this.submissionStatus.set('Kategoria została dodana!');
           this.categoryForm.reset();
         },
-        error: () => this.submissionStatus.set('Failed to add category.'),
+        error: () => this.submissionStatus.set('Błąd przy dodawaniu kategorii.'),
       });
     }
   }

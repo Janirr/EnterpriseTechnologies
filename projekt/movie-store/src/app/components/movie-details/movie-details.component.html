@@ -1,9 +1,17 @@
 <div class="container mt-4" *ngIf="movie">
-  <h2>{{ movie.title }} ({{ movie.releaseYear }})</h2>
-  <p><strong>Kategoria:</strong> {{ movie.category?.name }}</p>
-  <p><strong>Opis:</strong></p>
-  <p>{{ movie.description }}</p>
-  <p><strong>Cena:</strong> {{ movie.price | currency:'PLN' }}</p>
-  <button class="btn btn-success" (click)="addToCart()">Dodaj do koszyka</button>
-  <a routerLink="/movies" class="btn btn-secondary ms-2">Powrót</a>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ movie.title }} ({{ movie.releaseYear }})</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Kategoria:</strong> {{ movie.category?.name }}</p>
+      <p><strong>Opis:</strong></p>
+      <p>{{ movie.description }}</p>
+      <p><strong>Cena:</strong> {{ movie.price | currency:'PLN' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addToCart()">Dodaj do koszyka</button>
+      <a routerLink="/movies" mat-button color="accent" class="ms-2">Powrót</a>
+    </mat-card-actions>
+  </mat-card>
 </div>

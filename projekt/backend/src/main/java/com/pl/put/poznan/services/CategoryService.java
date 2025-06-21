@@ -5,6 +5,7 @@ import com.pl.put.poznan.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -20,5 +21,9 @@ public class CategoryService {
 
     public Category addCategory(Category category) {
         return categoryRepository.save(category);
+    }
+
+    public Optional<Category> getCategoryByName(String name) {
+        return categoryRepository.findByName(name);
     }
 }

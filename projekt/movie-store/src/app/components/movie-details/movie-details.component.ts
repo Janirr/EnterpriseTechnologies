@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieService } from 'src/app/services/movie.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Movie } from 'src/app/models/movie.model';
@@ -14,7 +15,8 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private cartService: CartService
+    private cartService: CartService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -24,8 +26,21 @@ export class MovieDetailsComponent implements OnInit {
 
   addToCart() {
     if (this.movie) {
-      this.cartService.add(this.movie);
-      alert('Film dodany do koszyka!');
+      const isAlreadyInCart = this.cartService.getItems().some(item => item.id === this.movie?.id);
+      if (isAlreadyInCart) {
+        this.snackBar.open('Film już znajduje się w koszyku!', 'Zamknij', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      } else {
+        this.cartService.add(this.movie);
+        this.snackBar.open('Film dodany do koszyka!', 'Zamknij', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      }
     }
   }
 }

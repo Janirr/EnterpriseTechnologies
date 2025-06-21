@@ -1,20 +1,27 @@
 <div class="container mt-4">
   <h2>Katalog filmów</h2>
-  <select class="form-select mb-3" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
-    <option value="">Wszystkie kategorie</option>
-    <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
-  </select>
+  <mat-form-field appearance="fill" class="mb-3">
+    <mat-label>Wybierz kategorię</mat-label>
+    <mat-select [(value)]="selectedCategory" (selectionChange)="onCategoryChange()">
+      <mat-option value="">Wszystkie kategorie</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category.name">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let movie of movies">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ movie.title }} ({{ movie.releaseYear }})</h5>
+      <mat-card>
+        <mat-card-content>
+        <mat-card-title>{{ movie.title }} ({{ movie.releaseYear }})</mat-card-title>
           <p>Kategoria: {{ movie.category?.name }}</p>
           <p>Cena: {{ movie.price | currency:'PLN' }}</p>
-          <a [routerLink]="['/movies', movie.id]" class="btn btn-primary">Szczegóły</a>
-        </div>
-      </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a [routerLink]="['/movies', movie.id]" mat-button color="primary">Szczegóły</a>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
